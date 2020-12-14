@@ -179,7 +179,8 @@ public extension PBXGroup {
         sourceTree: PBXSourceTree = .group,
         sourceRoot: Path,
         override: Bool = true,
-        validatePresence: Bool = true
+        validatePresence: Bool = true,
+        skipLastKnownFileType: Bool = false
     ) throws -> PBXFileReference {
         let projectObjects = try objects()
         if validatePresence, !filePath.exists {
@@ -222,7 +223,7 @@ public extension PBXGroup {
             sourceTree: sourceTree,
             name: filePath.lastComponent,
             explicitFileType: filePath.extension.flatMap(Xcode.filetype),
-            lastKnownFileType: filePath.extension.flatMap(Xcode.filetype),
+            lastKnownFileType: skipLastKnownFileType ? nil : filePath.extension.flatMap(Xcode.filetype),
             path: path
         )
         projectObjects.add(object: fileReference)
