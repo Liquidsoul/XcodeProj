@@ -40,7 +40,7 @@ final class PBXProjIntegrationTests: XCTestCase {
             try checkedOutput("git", ["add", "."])
             try checkedOutput("git", [
                 "-c", "user.email=test@example.com", "-c", "user.name=Test User",
-                "commit", "-m", "test"
+                "commit", "-m", "test", "--no-gpg-sign"
             ])
 
             // Read/write the project
